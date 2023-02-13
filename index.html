@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<style>
+  .tabela{
+    display: flex;
+    justify-content: center;
+  }
+  table{
+    max-width: 1000px;
+
+  }
+  button{
+    background-color: transparent !important;
+    border: none;
+    width: 0;
+    height: 40px;
+    padding: 5px 5px;
+  }
+    tr td:nth-child(3):after{
+    content: "Ghz";
+    text-align: right;
+    padding: 5px;
+   }
+
+</style>
+<body>
+  <div class="tabela">
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th>Processador ID</th>
+        <th>Nome do Processador</th>
+        <th>Clock</th>
+        <th>Núcleos</th>
+        <th>Threads</th>
+
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+    
+  </table>
+</div>
+  <script>
+window.onload = (event) => {
+  fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector('#table-body');
+        
+        data.forEach(item => {
+          const row = tableBody.insertRow();
+          row.insertCell().innerHTML = item.processador_id;
+          row.insertCell().innerHTML = item.nome_do_processador;
+          row.insertCell().innerHTML = item.clock;
+          row.insertCell().innerHTML = item.nucleos;
+          row.insertCell().innerHTML = item.threads;
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+};
+
+
+  </script>
+  
+</body>
+</html>
