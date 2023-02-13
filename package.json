@@ -18,7 +18,8 @@
     "serveless": "^0.0.2",
     "serverless-http": "^1.9.1"
   },
-  "engines": {
-    "node": "14.x"
-  }
+"engines": {
+  "node": "16.19.0",
+  "npm": "8.19.3"
+}
 }
