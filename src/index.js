@@ -18,7 +18,7 @@ const knex = require('knex')({
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-app.use(path.join(__dirname, 'index.html'), router);
+app.use(`/.netlify/functions/api`, router);
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
