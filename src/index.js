@@ -1,9 +1,8 @@
-const serverless = require("serverless-http");
-const router=express.Router();
-const port = process.env.PORT;
+const path = require('path');
+const port = process.env.PORT||3000;
 const express = require('express');
 const app = express();
-const path = require('path');
+const router=express.Router();
 const fs = require('fs');
 const knex = require('knex')({
   client: 'pg',
@@ -16,7 +15,8 @@ const knex = require('knex')({
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+
 });
 app.use(`/database/`, router);
 
@@ -46,4 +46,3 @@ async function monitorTable() {
 
 monitorTable();
 module.exports = app;
-module.exports.handler = serverless(app);

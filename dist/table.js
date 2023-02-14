@@ -1,6 +1,6 @@
-const path = require('path');
 window.onload = (event) => {
-    fetch(path.join(__dirname, 'data.json'))
+    fetch('../src/data.json')
+    
         .then(response => response.json())
         .then(data => {
           console.log(data)
