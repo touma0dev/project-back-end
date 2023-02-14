@@ -1,0 +1,17 @@
+    [build]
+  command = "npm install"
+  publish = "dist"
+
+[[redirects]]
+  from = "/"
+  to = "/dist/index.html"
+  status = 200
+[[redirects]]
+  from = "/api/*"
+  to = "http://localhost:3000/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/database/*"
+  to = "http://localhost:3000/database/:splat"
+  status = 200
