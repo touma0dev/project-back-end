@@ -1,5 +1,5 @@
 window.onload = (event) => {
-    fetch('../src/data.json')
+    fetch('../dist/src/data.json')
     
         .then(response => response.json())
         .then(data => {
