@@ -1,5 +1,5 @@
- [build]
-  command = "npm run build"
+[build]
+  functions = "functions"
 
 [dev]
-  command = "npm start"
+  publish = "dist"
