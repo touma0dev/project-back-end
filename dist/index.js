@@ -1,4 +1,5 @@
-
+const serverless = require("serverless-http");
+const router=express.Router();
 const port = process.env.PORT;
 const express = require('express');
 const app = express();
@@ -17,6 +18,7 @@ const knex = require('knex')({
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.use(path.join(__dirname, 'index.html'), router);
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
@@ -43,3 +45,5 @@ async function monitorTable() {
 }
 
 monitorTable();
+module.exports = app;
+module.exports.handler = serverless(app);
