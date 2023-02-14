@@ -1,9 +1,7 @@
-const path = require('path');
-const port = process.env.PORT||3000;
 const express = require('express');
 const app = express();
-const router=express.Router();
 const fs = require('fs');
+const path = require('path');
 const knex = require('knex')({
   client: 'pg',
   connection: {
@@ -14,19 +12,11 @@ const knex = require('knex')({
   }
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+app.use(express.static('dist'));
 
-});
-app.use(`/database/`, router);
-
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
-//Robozinho do millgrau
 async function updateFile() {
   const rows = await knex.select().from('processor');
-  fs.writeFile('./data.json', JSON.stringify(rows), (err) => {
+  fs.writeFile(path.join(__dirname, 'dist', 'data.json'), JSON.stringify(rows), (err) => {
     if (err) throw err;
     console.log('File updated successfully');
   });
@@ -41,8 +31,14 @@ async function monitorTable() {
       updateFile();
       previousRows = currentRows;
     }
-  }, 4000);
+  }, 2000);
 }
 
 monitorTable();
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
 module.exports = app;
