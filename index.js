@@ -1,12 +1,24 @@
+const port = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+const path = require('path');
 const fs = require('fs');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : 'salt.db.elephantsql.com',
-    user : 'ixjsljvy',
-    password : `ZrcNvMZjr1brxEh_5t070GL2ba35VNyf`,
-    database : 'ixjsljvy'
+    host : 'raja.db.elephantsql.com',
+    user : 'flrwydvq',
+    password : `GR-lX238UqFEWMRCNCVPZQ4WmZs3dBOY`,
+    database : 'flrwydvq'
   }
+});
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'public', 'index.html'));
 });
 
 async function updateFile() {
@@ -26,7 +38,7 @@ async function monitorTable() {
       updateFile();
       previousRows = currentRows;
     }
-  }, 5000);
+  }, 4000);
 }
 
 monitorTable();

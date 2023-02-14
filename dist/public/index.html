@@ -31,19 +31,18 @@
     text-align: right;
     padding: 5px;
    }
-
 </style>
 <body>
   <div class="tabela">
   <table class="table table-bordered table-sm">
     <thead>
       <tr>
-        <th>Processador ID</th>
+        <th data-sortable>Processador ID</th>
         <th>Nome do Processador</th>
         <th>Clock</th>
         <th>Núcleos</th>
         <th>Threads</th>
-
+        <th>Price</th>
       </tr>
     </thead>
     <tbody id="table-body"></tbody>
@@ -55,21 +54,29 @@ window.onload = (event) => {
   fetch('data.json')
       .then(response => response.json())
       .then(data => {
+        console.log(data)
+
+        // Ordena os objetos pelo ID numérico em ordem crescente
+        data.sort((a, b) => a.id - b.id);
+
         const tableBody = document.querySelector('#table-body');
         
         data.forEach(item => {
           const row = tableBody.insertRow();
-          row.insertCell().innerHTML = item.processador_id;
-          row.insertCell().innerHTML = item.nome_do_processador;
+          row.insertCell().innerHTML = item.id;
+          row.insertCell().innerHTML = item.cpu;
           row.insertCell().innerHTML = item.clock;
-          row.insertCell().innerHTML = item.nucleos;
+          row.insertCell().innerHTML = item.core;
           row.insertCell().innerHTML = item.threads;
+          row.insertCell().innerHTML = `R$ ${item.price.toLocaleString()}`;
         });
       })
       .catch(error => {
         console.error(error);
       });
 };
+
+
 
 
   </script>
