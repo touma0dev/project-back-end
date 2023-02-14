@@ -4,8 +4,8 @@
   "description": "A sample Node.js project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "NODE_ENV=production node index.js serve build src",
+    "start": "node dist/index.js",
+    "build": "NODE_ENV=production node dist/index.js serve build src",
     "test": "jest",
     "build:verbose": "npm run build --verbose",
     "dev": "nodemon --watch src --exec 'npm run start'"

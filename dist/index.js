@@ -1,3 +1,4 @@
+
 const port = process.env.PORT || 3000;
 const express = require('express');
 const app = express();
@@ -13,14 +14,14 @@ const knex = require('knex')({
   }
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'public', 'index.html'));
-});
-
+//Robozinho do millgrau
 async function updateFile() {
   const rows = await knex.select().from('processor');
   fs.writeFile('./data.json', JSON.stringify(rows), (err) => {
