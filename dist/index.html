@@ -8,7 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="/dist/table.js"></script>
+    <script >
+      window.onload = (event) => {
+    fetch('../src/data.json')
+    
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+  
+          // Ordena os objetos pelo ID numérico em ordem crescente
+          data.sort((a, b) => a.id - b.id);
+  
+          const tableBody = document.querySelector('#table-body');
+          
+          data.forEach(item => {
+            const row = tableBody.insertRow();
+            row.insertCell().innerHTML = item.id;
+            row.insertCell().innerHTML = item.cpu;
+            row.insertCell().innerHTML = item.clock;
+            row.insertCell().innerHTML = item.core;
+            row.insertCell().innerHTML = item.threads;
+            row.insertCell().innerHTML = `R$ ${item.price.toLocaleString()}`;
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+  };
+    </script>
     <title>Document</title>
 </head>
 <style>
